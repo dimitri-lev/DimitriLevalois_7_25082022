@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv').config();
+
+const userRoutes = require('./routes/user');
 
 // connexion bdd
 mongoose
   .connect(
-    `mongodb+srv://groupomania:Bf6HZOeWlvOixKTw@cluster0.73fvs.mongodb.net/?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.SECRET_DB_NAME}:${process.env.SECRET_DB_PASSWORD}@${process.env.SECRET_DB_HOST}?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -29,5 +32,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
