@@ -10,6 +10,8 @@ exports.signup = (req, res, next) => {
     .then((hash) => {
       const user = new User({
         email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         password: hash,
       });
       user
