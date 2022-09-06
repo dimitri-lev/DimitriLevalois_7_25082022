@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const limiter = require('../middleware/limiter');
+const limiter = require('../middleware/rate-limite');
 const userCtrl = require('../controllers/user');
 const checkEmail = require('../middleware/check-email');
 const checkPassword = require('../middleware/check-password');

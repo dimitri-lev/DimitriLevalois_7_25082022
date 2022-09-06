@@ -2,14 +2,10 @@ const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
   userId: { type: String, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  imageUrl: { type: String, required: true },
   text: { type: String, required: true },
-  /* imageUrl: { type: String },
-  likes: { type: Number },
-  dislikes: { type: Number },
-  usersLiked: { type: [String] },
-  usersDisliked: { type: [String] }, */
+  likes: { type: Number, default: 0 },
+  usersLiked: { type: [String], default: [] },
 });
 
 module.exports = mongoose.model('Post', postSchema);
