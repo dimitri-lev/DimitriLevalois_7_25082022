@@ -29,8 +29,17 @@ exports.getOnePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
   const post = new Post({
     userId: req.body.userId,
-    imageUrl: req.body.imageUrl,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+      req.body.imageUrl
+    }`,
+    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${
+      req.file.filename
+    }`, */
     text: req.body.text,
+    likes: 0,
+    dislikes: 0,
+    usersLiked: [' '],
+    usersDisliked: [' '],
   });
   post
     .save()
@@ -89,5 +98,8 @@ exports.likePost = (req, res, next) => {
         })
         .catch((error) => sessionStorage.status(404).json({ error }));
       break;
+
+    default:
+      console.log(error);
   }
 };
