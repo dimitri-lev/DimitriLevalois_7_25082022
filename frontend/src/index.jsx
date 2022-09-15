@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Posts from './pages/Posts';
+import Error from './components/Error';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,8 +14,10 @@ root.render(
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/Posts" element={<Posts />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </Router>
   </React.StrictMode>

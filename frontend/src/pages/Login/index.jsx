@@ -1,12 +1,25 @@
+import { useEffect } from 'react';
+
 function Signup() {
+  useEffect(() => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'React Hooks POST Request Example' }),
+    };
+    fetch('http://localhost:3000/api/auth/login', requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <form>
       <div>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" />
       </div>
       <div>
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input type="password" />
       </div>
       <button>SIGNUP</button>
