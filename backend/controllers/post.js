@@ -38,10 +38,10 @@ exports.createPost = (req, res, next) => {
       req.file.filename
     }`,
     text: req.body.text,
-    likes: 0,
-    dislikes: 0,
-    usersLiked: [' '],
-    usersDisliked: [' '],
+    // likes: 0,
+    // dislikes: 0,
+    // usersLiked: [' '],
+    // usersDisliked: [' '],
   });
   post
     .save()

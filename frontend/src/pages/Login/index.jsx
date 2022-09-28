@@ -9,7 +9,7 @@ function Signup() {
     };
     fetch('http://localhost:3000/api/auth/login', requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => data)
       .catch((error) => console.log(error));
   }, []);
   return (

@@ -7,6 +7,7 @@ const SignInForm = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
     axios({
       method: 'POST',
       url: 'http://localhost:3000/api/auth/login',
@@ -17,6 +18,9 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
+        // Enregistrer en localStorage (Token , User ID , UserAdmin)
+        // Redirection vers les post
+
         console.log(res);
       })
       .catch((err) => {

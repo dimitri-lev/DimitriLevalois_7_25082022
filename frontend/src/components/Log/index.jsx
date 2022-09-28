@@ -28,7 +28,7 @@ const Log = () => {
         className="form-container"
         style={{
           display: 'flex',
-          backgroundColor: '#FFD7D7',
+          backgroundColor: 'orange',
           width: '50%',
           alignItems: 'center',
         }}
