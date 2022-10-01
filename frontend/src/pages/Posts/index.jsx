@@ -1,5 +1,6 @@
 import GetPosts from '../../components/GetPosts';
 import Logo from '../../components/Logo';
+import { Navigate } from 'react-router-dom';
 
 function Posts() {
   //Vérification sur le Token existe ?
@@ -11,13 +12,19 @@ function Posts() {
 
   //HTML afficher tous les posts via composant post (image, text, j'aime)
 
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div>
       <div>
         <Logo />
       </div>
       <div>
-        <GetPosts />
+        <GetPosts token={token} />
       </div>
     </div>
   );

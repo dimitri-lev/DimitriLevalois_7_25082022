@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [success, setSuccess] = useState('false');
+
+  function onClickSuccess() {
+    if (success === true) {
+      return navigate('/posts');
+    } else {
+      return navigate('/');
+    }
+  }
+
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,9 +31,12 @@ const SignInForm = () => {
     })
       .then((res) => {
         // Enregistrer en localStorage (Token , User ID , UserAdmin)
+        localStorage.setItem('token', res.data.token);
         // Redirection vers les post
 
-        console.log(res);
+        setSuccess(true);
+
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -51,7 +66,7 @@ const SignInForm = () => {
             value={password}
           />
         </div>
-        <input type="submit" value="Se connecter" />
+        <input type="submit" value="Se connecter" onClick={onClickSuccess} />
       </form>
     </div>
   );
