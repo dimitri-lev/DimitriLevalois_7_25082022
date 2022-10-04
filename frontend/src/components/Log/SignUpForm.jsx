@@ -27,6 +27,7 @@ const SignUpForm = () => {
         console.log(err);
       });
   };
+
   return (
     <div style={{ marginLeft: '100px' }}>
       <div>
