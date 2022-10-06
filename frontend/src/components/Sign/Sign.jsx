@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import '../../utils/styles/Sign.css';
 
 const Sign = () => {
   const [signUp, setSignUp] = useState(true);
@@ -15,24 +16,8 @@ const Sign = () => {
     }
   };
   return (
-    <div
-      className="connection-form"
-      style={{
-        textAlign: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-        height: '150px',
-      }}
-    >
-      <div
-        className="form-container"
-        style={{
-          display: 'flex',
-          backgroundColor: 'orange',
-          width: '50%',
-          alignItems: 'center',
-        }}
-      >
+    <div className="connection-form">
+      <div className="form-container">
         <ul>
           <li
             onClick={HandleSign}

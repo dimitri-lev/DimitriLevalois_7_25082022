@@ -1,0 +1,15 @@
+.post-container {
+  width: 80%;
+  height: 200px;
+  background-color: orange;
+  border: 2px black solid;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.post-img {
+  width: 100px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}

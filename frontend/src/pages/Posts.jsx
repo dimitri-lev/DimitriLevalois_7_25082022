@@ -1,4 +1,4 @@
-import GetPosts from '../components/GetPosts';
+import GetPosts from '../components/GetPosts/GetPosts';
 import Logo from '../components/Logo';
 import { Navigate } from 'react-router-dom';
 

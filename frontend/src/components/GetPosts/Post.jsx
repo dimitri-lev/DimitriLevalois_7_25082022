@@ -1,28 +1,24 @@
 import React from 'react';
+import '../../utils/styles/GetPosts.css';
 
 const Post = ({ article }) => {
+  console.log(article);
+  const dateFormater = (date) => {
+    let newDate = new Date(date).toLocaleDateString('FR-fr', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    });
+    return newDate;
+  };
   return (
-    <div
-      style={{
-        width: '80%',
-        height: '200px',
-        backgroundColor: 'orange',
-        border: '2px black solid',
-        marginBottom: '20px',
-        position: 'relative',
-      }}
-    >
+    <div className="post-container">
       <p style={{ marginLeft: '20px' }}>{article.text}</p>
-      <img
-        src={article.imageUrl}
-        alt=""
-        style={{
-          width: '100px',
-          position: 'absolute',
-          right: '20px',
-          top: '20px',
-        }}
-      />
+      <p>{dateFormater(article.date)}</p>
+      <img src={article.imageUrl} alt="" className="post-img" />
 
       <div>
         <p style={{ position: 'absolute', right: '160px', bottom: '0px' }}>

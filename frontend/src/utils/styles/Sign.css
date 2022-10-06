@@ -1,0 +1,13 @@
+.connection-form {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+}
+
+.form-container {
+  display: flex;
+  background-color: orange;
+  width: 50%;
+  align-items: center;
+}

@@ -7,23 +7,12 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('false');
 
-  function onClickSuccess() {
-    if (success === true) {
-      return navigate('/posts');
-    } else {
-      return navigate('/');
-    }
-  }
-
-  const navigate = useNavigate();
-
   const handleLogin = (e) => {
     e.preventDefault();
 
     axios({
       method: 'POST',
       url: 'http://localhost:3000/api/auth/login',
-      /* withCredentials: true, */
       data: {
         email,
         password,
@@ -42,6 +31,9 @@ const SignIn = () => {
         console.log(err);
       });
   };
+
+  const navigate = useNavigate();
+
   return (
     <div style={{ marginLeft: '100px' }}>
       <div>
@@ -66,7 +58,13 @@ const SignIn = () => {
             value={password}
           />
         </div>
-        <input type="submit" value="Se connecter" onClick={onClickSuccess} />
+        <input
+          type="submit"
+          value="Se connecter"
+          onClick={() =>
+            success === true ? navigate('/posts') : navigate('/')
+          }
+        />
       </form>
     </div>
   );

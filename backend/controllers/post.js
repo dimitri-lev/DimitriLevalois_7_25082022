@@ -3,21 +3,9 @@ const fs = require('fs');
 
 exports.getAllPosts = (req, res, next) => {
   Post.find()
+    .sort('-date')
     .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(404).json({ error }));
-
-  /* Post.aggregate([
-    {
-      $lookup: {
-        from: 'users',
-        localField: 'userId',
-        foreignField: '_id',
-        as: 'test',
-      },
-    },
-  ])
-    .toArr((posts) => res.status(200).json(posts))
-    .catch((error) => res.status(404).json({ error })); */
 };
 
 exports.getOnePost = (req, res, next) => {
@@ -31,9 +19,6 @@ exports.createPost = (req, res, next) => {
 
   const post = new Post({
     userId: req.userId,
-    // imageUrl: `${req.protocol}://${req.get('host')}/images/${
-    //   req.body.imageUrl
-    // }`,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`,
