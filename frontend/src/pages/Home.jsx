@@ -1,5 +1,5 @@
-import Log from '../../components/Log';
-import Logo from '../../components/Logo';
+import Sign from '../components/Sign';
+import Logo from '../components/Logo';
 
 function Home() {
   return (
@@ -8,7 +8,7 @@ function Home() {
         <Logo />
       </div>
       <div>
-        <Log />
+        <Sign />
       </div>
     </div>
   );

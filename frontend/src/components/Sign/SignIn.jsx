@@ -1,58 +1,53 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const SignUpForm = () => {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [success, setSuccess] = useState('false');
+
+  function onClickSuccess() {
+    if (success === true) {
+      return navigate('/posts');
+    } else {
+      return navigate('/');
+    }
+  }
+
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/auth/signup',
+      url: 'http://localhost:3000/api/auth/login',
       /* withCredentials: true, */
       data: {
         email,
         password,
-        firstName,
-        lastName,
       },
     })
       .then((res) => {
-        console.log(res);
+        // Enregistrer en localStorage (Token , User ID , UserAdmin)
+        localStorage.setItem('token', res.data.token);
+        // Redirection vers les post
+
+        setSuccess(true);
+
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   return (
     <div style={{ marginLeft: '100px' }}>
       <div>
-        <div>S'inscrire</div>
+        <div>Se connecter</div>
       </div>
-
       <form action="" onSubmit={handleLogin}>
-        <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="firstName">Prénom</label>
-          <input
-            type="text"
-            name="fistName"
-            onChange={(e) => setFirstName(e.target.value)}
-            value={firstName}
-          />
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="lastName">Nom</label>
-          <input
-            type="text"
-            name="firstName"
-            onChange={(e) => setLastName(e.target.value)}
-            value={lastName}
-          />
-        </div>
         <div style={{ marginBottom: '5px' }}>
           <label htmlFor="email">Email</label>
           <input
@@ -71,10 +66,10 @@ const SignUpForm = () => {
             value={password}
           />
         </div>
-        <input type="submit" value="S'inscrire" />
+        <input type="submit" value="Se connecter" onClick={onClickSuccess} />
       </form>
     </div>
   );
 };
 
-export default SignUpForm;
+export default SignIn;

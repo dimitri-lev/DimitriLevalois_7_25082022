@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import SignInForm from './SignInForm';
-import SignUpForm from './SignUpForm';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
-const Log = () => {
+const Sign = () => {
   const [signUp, setSignUp] = useState(true);
   const [signIn, setSignIn] = useState(false);
   const HandleSign = (e) => {
@@ -45,11 +45,11 @@ const Log = () => {
             Se connecter
           </li>
         </ul>
-        {signUp && <SignUpForm />}
-        {signIn && <SignInForm />}
+        {signUp && <SignUp />}
+        {signIn && <SignIn />}
       </div>
     </div>
   );
 };
 
-export default Log;
+export default Sign;

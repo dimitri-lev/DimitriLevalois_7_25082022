@@ -1,5 +1,5 @@
-import GetPosts from '../../components/GetPosts';
-import Logo from '../../components/Logo';
+import GetPosts from '../components/GetPosts';
+import Logo from '../components/Logo';
 import { Navigate } from 'react-router-dom';
 
 function Posts() {
