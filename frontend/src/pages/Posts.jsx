@@ -1,6 +1,7 @@
 import GetPosts from '../components/GetPosts/GetPosts';
 import Logo from '../components/Logo';
 import { Navigate } from 'react-router-dom';
+import CreatePost from '../components/CreatePost/CreatePost';
 
 function Posts() {
   //Vérification sur le Token existe ?
@@ -18,12 +19,15 @@ function Posts() {
     return <Navigate to="/" />;
   }
 
+  //UseStat newpost false
+
   return (
     <div>
       <div>
         <Logo />
       </div>
       <div>
+        <CreatePost token={token} />
         <GetPosts token={token} />
       </div>
     </div>

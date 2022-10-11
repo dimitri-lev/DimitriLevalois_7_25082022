@@ -6,6 +6,8 @@ import Post from './Post';
 const GetPosts = ({ token }) => {
   const [postsData, setPostsData] = useState([]);
 
+  //UseStatat new post
+
   useEffect(() => {
     axios
       .get('http://localhost:3000/api/posts', {
@@ -14,7 +16,7 @@ const GetPosts = ({ token }) => {
         },
       })
       .then((res) => setPostsData(res.data));
-  }, []);
+  }, [token]);
 
   /* systeme de date ?, nom et prénom de l'auteur du post */
   return (

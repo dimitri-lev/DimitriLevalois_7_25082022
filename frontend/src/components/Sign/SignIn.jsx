@@ -7,6 +7,8 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('false');
 
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -22,8 +24,9 @@ const SignIn = () => {
         // Enregistrer en localStorage (Token , User ID , UserAdmin)
         localStorage.setItem('token', res.data.token);
         // Redirection vers les post
+        navigate('/posts');
 
-        setSuccess(true);
+        // setSuccess(true);
 
         console.log(res.data);
       })
@@ -31,8 +34,6 @@ const SignIn = () => {
         console.log(err);
       });
   };
-
-  const navigate = useNavigate();
 
   return (
     <div style={{ marginLeft: '100px' }}>
@@ -58,13 +59,14 @@ const SignIn = () => {
             value={password}
           />
         </div>
-        <input
+        {/* <input
           type="submit"
           value="Se connecter"
           onClick={() =>
             success === true ? navigate('/posts') : navigate('/')
           }
-        />
+        /> */}
+        <input type="submit" value="Se connecter" />
       </form>
     </div>
   );

@@ -1,8 +1,10 @@
 import React from 'react';
 import '../../utils/styles/GetPosts.css';
+import { useState } from 'react';
 
 const Post = ({ article }) => {
   console.log(article);
+
   const dateFormater = (date) => {
     let newDate = new Date(date).toLocaleDateString('FR-fr', {
       year: 'numeric',
@@ -14,9 +16,16 @@ const Post = ({ article }) => {
     });
     return newDate;
   };
+
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <div className="post-container">
-      <p style={{ marginLeft: '20px' }}>{article.text}</p>
+      {isEditing ? (
+        <textarea></textarea>
+      ) : (
+        <p style={{ marginLeft: '20px' }}>{article.text}</p>
+      )}
       <p>{dateFormater(article.date)}</p>
       <img src={article.imageUrl} alt="" className="post-img" />
 
@@ -25,6 +34,7 @@ const Post = ({ article }) => {
           {article.likes}
         </p>
         <button
+          onClick={() => setIsEditing(true)}
           style={{ position: 'absolute', right: '100px', bottom: '10px' }}
         >
           Edit

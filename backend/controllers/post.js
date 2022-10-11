@@ -19,9 +19,9 @@ exports.createPost = (req, res, next) => {
 
   const post = new Post({
     userId: req.userId,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
-    }`,
+    }`, */
     text: req.body.text,
     // likes: 0,
     // dislikes: 0,
@@ -88,11 +88,12 @@ exports.deletePost = (req, res, next) => {
 
 exports.likePost = (req, res, next) => {
   let like = req.body.like;
+  console.log(req.body);
   let userId = req.userId;
   let postId = req.params.id;
 
   switch (like) {
-    case +1:
+    case 1:
       Post.updateOne(
         { _id: postId },
         { $push: { usersLiked: userId }, $inc: { likes: +1 } }
@@ -118,6 +119,6 @@ exports.likePost = (req, res, next) => {
       break;
 
     default:
-      console.log(error);
+    // console.log(error);
   }
 };
