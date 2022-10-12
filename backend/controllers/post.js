@@ -19,9 +19,9 @@ exports.createPost = (req, res, next) => {
 
   const post = new Post({
     userId: req.userId,
-    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
-    }`, */
+    }`,
     text: req.body.text,
     // likes: 0,
     // dislikes: 0,
@@ -72,7 +72,7 @@ exports.updatePost = (req, res, next) => {
   }
 };
 
-exports.deletePost = (req, res, next) => {
+/* exports.deletePost = (req, res, next) => {
   // -Supprimer l'image
   Post.findOne({ _id: req.params.id })
     .then((post) => {
@@ -82,6 +82,17 @@ exports.deletePost = (req, res, next) => {
           .then(() => res.status(200).json({ message: 'Post supprimée' }))
           .catch((error) => res.status(400).json({ error }));
       });
+    })
+    .catch((error) => res.status(500).json({ error }));
+}; */
+
+exports.deletePost = (req, res, next) => {
+  // -Supprimer l'image
+  Post.findOne({ _id: req.params.id })
+    .then(() => {
+      Post.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Post supprimée' }))
+        .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
 };

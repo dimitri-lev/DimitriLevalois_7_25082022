@@ -23,7 +23,7 @@ const GetPosts = ({ token }) => {
     <div>
       <ul>
         {postsData.map((article) => (
-          <Post key={article._id} article={article} />
+          <Post key={article._id} article={article} token={token} />
         ))}
       </ul>
     </div>
