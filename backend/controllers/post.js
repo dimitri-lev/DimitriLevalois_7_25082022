@@ -3,6 +3,7 @@ const fs = require('fs');
 
 exports.getAllPosts = (req, res, next) => {
   Post.find()
+    .populate('userId')
     .sort('-date')
     .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(404).json({ error }));
@@ -72,7 +73,7 @@ exports.updatePost = (req, res, next) => {
   }
 };
 
-/* exports.deletePost = (req, res, next) => {
+exports.deletePost = (req, res, next) => {
   // -Supprimer l'image
   Post.findOne({ _id: req.params.id })
     .then((post) => {
@@ -84,18 +85,18 @@ exports.updatePost = (req, res, next) => {
       });
     })
     .catch((error) => res.status(500).json({ error }));
-}; */
-
-exports.deletePost = (req, res, next) => {
-  // -Supprimer l'image
-  Post.findOne({ _id: req.params.id })
-    .then(() => {
-      Post.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Post supprimée' }))
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
 };
+
+// exports.deletePost = (req, res, next) => {
+//   // -Supprimer l'image
+//   Post.findOne({ _id: req.params.id })
+//     .then(() => {
+//       Post.deleteOne({ _id: req.params.id })
+//         .then(() => res.status(200).json({ message: 'Post supprimée' }))
+//         .catch((error) => res.status(400).json({ error }));
+//     })
+//     .catch((error) => res.status(500).json({ error }));
+// };
 
 exports.likePost = (req, res, next) => {
   let like = req.body.like;
