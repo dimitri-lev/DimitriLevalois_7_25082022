@@ -57,6 +57,9 @@ const Post = ({ article, token }) => {
           {editContent ? editContent : article.text}
         </p>
       )}
+      <p>
+        {article.userId.firstName} {article.userId.lastName}
+      </p>
       <p>{dateFormater(article.date)}</p>
       <img src={article.imageUrl} alt="" className="post-img" />
 
