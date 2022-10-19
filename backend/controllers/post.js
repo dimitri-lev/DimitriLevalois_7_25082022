@@ -90,17 +90,6 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-// exports.deletePost = (req, res, next) => {
-//   // -Supprimer l'image
-//   Post.findOne({ _id: req.params.id })
-//     .then(() => {
-//       Post.deleteOne({ _id: req.params.id })
-//         .then(() => res.status(200).json({ message: 'Post supprimée' }))
-//         .catch((error) => res.status(400).json({ error }));
-//     })
-//     .catch((error) => res.status(500).json({ error }));
-// };
-
 exports.likePost = (req, res, next) => {
   let like = req.body.like;
   console.log(req.body);

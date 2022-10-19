@@ -1,13 +1,51 @@
+body {
+  font-family: Lato, sans-serif;
+}
+
 .connection-form {
   text-align: center;
   display: flex;
   justify-content: center;
-  height: 150px;
+  height: 180px;
+}
+
+li {
+  list-style-type: none;
 }
 
 .form-container {
   display: flex;
-  background-color: orange;
+  background-color: #ffd7d7;
   width: 50%;
   align-items: center;
+  border-radius: 30px;
+}
+
+.btn-log {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #fd2b01d0;
+  color: white;
+  border: none;
+  width: 100px;
+}
+
+.btn-log:hover {
+  opacity: 0.5;
+}
+
+.signIn-container input {
+  border-radius: 30px;
+}
+
+.label-email {
+  padding-right: 40px;
+}
+
+.label-password {
+  padding-right: 10px;
+}
+
+.signIn-valider {
+  margin-left: 70px;
 }

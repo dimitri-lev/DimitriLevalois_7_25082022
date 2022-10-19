@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 
@@ -12,22 +11,6 @@ const CreatePost = ({ token }) => {
     let data = new FormData();
     data.append('image', file);
     data.append('text', content);
-
-    /* axios({
-      method: 'POST',
-      url: 'http://localhost:3000/api/posts',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-      data: {
-        /* text: content,
-        imageUrl: data, */
-    //data,
-    /* date: Date.now(), */
-    //},
-    //});
-    //setContent(''); */
 
     fetch(
       'http://localhost:3000/api/posts',

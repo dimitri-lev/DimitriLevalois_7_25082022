@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../../utils/styles/Sign.css';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -36,13 +37,12 @@ const SignIn = () => {
   };
 
   return (
-    <div style={{ marginLeft: '100px' }}>
-      <div>
-        <div>Se connecter</div>
-      </div>
+    <div className="signIn-container" style={{ marginLeft: '100px' }}>
       <form action="" onSubmit={handleLogin}>
         <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="email">Email</label>
+          <label className="label-email" htmlFor="email">
+            Email
+          </label>
           <input
             name="email"
             type="email"
@@ -51,7 +51,9 @@ const SignIn = () => {
           />
         </div>
         <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="password">Password</label>
+          <label className="label-password" htmlFor="password">
+            Password
+          </label>
           <input
             type="password"
             name="password"
@@ -66,7 +68,7 @@ const SignIn = () => {
             success === true ? navigate('/posts') : navigate('/')
           }
         /> */}
-        <input type="submit" value="Se connecter" />
+        <input className="signIn-valider" type="submit" value="Valider" />
       </form>
     </div>
   );

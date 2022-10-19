@@ -30,10 +30,6 @@ const SignUp = () => {
 
   return (
     <div style={{ marginLeft: '100px' }}>
-      <div>
-        <div>S'inscrire</div>
-      </div>
-
       <form action="" onSubmit={handleLogin}>
         <div style={{ marginBottom: '5px' }}>
           <label htmlFor="firstName">Prénom</label>
@@ -71,7 +67,7 @@ const SignUp = () => {
             value={password}
           />
         </div>
-        <input type="submit" value="S'inscrire" />
+        <input type="submit" value="Valider" />
       </form>
     </div>
   );

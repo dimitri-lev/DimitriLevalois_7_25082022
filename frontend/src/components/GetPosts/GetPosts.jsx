@@ -21,7 +21,7 @@ const GetPosts = ({ token }) => {
   /* systeme de date ?, nom et prénom de l'auteur du post */
   return (
     <div>
-      <ul>
+      <ul className="posts-container">
         {postsData.map((article) => (
           <Post key={article._id} article={article} token={token} />
         ))}
