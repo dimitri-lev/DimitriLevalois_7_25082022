@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../../utils/styles/Sign.css';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -29,45 +30,49 @@ const SignUp = () => {
   };
 
   return (
-    <div style={{ marginLeft: '100px' }}>
-      <form action="" onSubmit={handleLogin}>
-        <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="firstName">Prénom</label>
+    <div className="signUp-container">
+      <form className="signUp-form" action="" onSubmit={handleLogin}>
+        <div>
+          {/* <label htmlFor="firstName">Prénom</label> */}
           <input
             type="text"
             name="fistName"
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
+            placeholder="Prénom"
           />
         </div>
-        <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="lastName">Nom</label>
+        <div>
+          {/* <label htmlFor="lastName">Nom</label> */}
           <input
             type="text"
-            name="firstName"
+            name="lastName"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
+            placeholder="Nom"
           />
         </div>
-        <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="email">Email</label>
+        <div>
+          {/* <label htmlFor="email">Email</label> */}
           <input
             name="email"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            placeholder="Email"
           />
         </div>
-        <div style={{ marginBottom: '5px' }}>
-          <label htmlFor="password">Password</label>
+        <div>
+          {/* <label htmlFor="password">Password</label> */}
           <input
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            placeholder="Mot de passe"
           />
         </div>
-        <input type="submit" value="Valider" />
+        <input className="input-valider" type="submit" value="Valider" />
       </form>
     </div>
   );

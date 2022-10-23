@@ -2,6 +2,7 @@ import GetPosts from '../components/GetPosts/GetPosts';
 import Logo from '../components/Logo';
 import { Navigate } from 'react-router-dom';
 import CreatePost from '../components/CreatePost/CreatePost';
+import Logout from '../components/Logout';
 
 function Posts() {
   //Vérification sur le Token existe ?
@@ -24,6 +25,7 @@ function Posts() {
   return (
     <div>
       <div>
+        <Logout />
         <Logo />
       </div>
       <div>

@@ -3,8 +3,8 @@ const fs = require('fs');
 
 exports.getAllPosts = (req, res, next) => {
   Post.find()
-    .populate('userId')
     .sort('-date')
+    .populate('userId')
     .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(404).json({ error }));
 };
@@ -42,7 +42,7 @@ exports.updatePost = (req, res, next) => {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           const postObject = {
-            ...req.body.post,
+            ...req.body,
             imageUrl: `${req.protocol}://${req.get('host')}/images/${
               req.file.filename
             }`,
@@ -77,8 +77,9 @@ exports.deletePost = (req, res, next) => {
   // -Supprimer l'image
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      //Post.userId != req.userId || isAdmin true ?
-      //else (Reques pour trouver User et récuper isAdmin)
+      //Post.userId == req.userId || req.isAdmin
+      //TRAITEMENT
+      //else (ERROR)
 
       const filename = post.imageUrl.split('/images/')[1];
       fs.unlink(`images/${filename}`, () => {
@@ -96,33 +97,53 @@ exports.likePost = (req, res, next) => {
   let userId = req.userId;
   let postId = req.params.id;
 
-  switch (like) {
-    case 1:
-      Post.updateOne(
-        { _id: postId },
-        { $push: { usersLiked: userId }, $inc: { likes: +1 } }
-      )
-        .then(() => res.status(200).json({ message: `J'aime` }))
-        .catch((error) => res.status(400).json({ error }));
+  Post.findOne({ _id: postId })
+    .then((post) => {
+      if (post.usersLiked.includes(userId)) {
+        Post.updateOne(
+          { _id: postId },
+          { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
+        )
+          .then(() => res.status(200).json({ message: `Neutre` }))
+          .catch((error) => res.status(400).json({ error }));
+      } else {
+        Post.updateOne(
+          { _id: postId },
+          { $push: { usersLiked: userId }, $inc: { likes: +1 } }
+        )
+          .then(() => res.status(200).json({ message: `J'aime` }))
+          .catch((error) => res.status(400).json({ error }));
+      }
+    })
+    .catch((error) => sessionStorage.status(404).json({ error }));
 
-      break;
+  // switch (like) {
+  //   case 1:
+  //     Post.updateOne(
+  //       { _id: postId },
+  //       { $push: { usersLiked: userId }, $inc: { likes: +1 } }
+  //     )
+  //       .then(() => res.status(200).json({ message: `J'aime` }))
+  //       .catch((error) => res.status(400).json({ error }));
 
-    case 0:
-      Post.findOne({ _id: postId })
-        .then((post) => {
-          if (post.usersLiked.includes(userId)) {
-            Post.updateOne(
-              { _id: postId },
-              { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
-            )
-              .then(() => res.status(200).json({ message: `Neutre` }))
-              .catch((error) => res.status(400).json({ error }));
-          }
-        })
-        .catch((error) => sessionStorage.status(404).json({ error }));
-      break;
+  //     break;
 
-    default:
-    // console.log(error);
-  }
+  //   case 0:
+  //     Post.findOne({ _id: postId })
+  //       .then((post) => {
+  //         if (post.usersLiked.includes(userId)) {
+  //           Post.updateOne(
+  //             { _id: postId },
+  //             { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
+  //           )
+  //             .then(() => res.status(200).json({ message: `Neutre` }))
+  //             .catch((error) => res.status(400).json({ error }));
+  //         }
+  //       })
+  //       .catch((error) => sessionStorage.status(404).json({ error }));
+  //     break;
+
+  //   default:
+  //   // console.log(error);
+  // }
 };

@@ -10,7 +10,6 @@ const Post = ({ article, token }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState('');
-  const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
 
   const dateFormater = (date) => {
@@ -26,10 +25,9 @@ const Post = ({ article, token }) => {
   };
 
   const handleEdit = () => {
-    setContent(content);
     let data = new FormData();
     data.append('image', file);
-    data.append('text', content);
+    data.append('text', editContent ? editContent : article.text);
 
     console.log(data);
 
@@ -43,6 +41,7 @@ const Post = ({ article, token }) => {
         text: editContent ? editContent : article.text,
       },
     }).then(() => setIsEditing(false)); */
+
     fetch(
       'http://localhost:3000/api/posts/' + article._id,
 
@@ -57,9 +56,9 @@ const Post = ({ article, token }) => {
       .then((response) => response.json())
 
       .then((result) => {
-        setIsEditing(false);
         console.log('Success:', result);
-        /* setFile(''); */
+        setIsEditing(false);
+        window.location.reload();
       })
 
       .catch((error) => {
@@ -86,70 +85,68 @@ const Post = ({ article, token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: {
-        like: 1,
-      },
     });
+    window.location.reload();
   };
 
   return (
     <div className="post-container">
-      {isEditing ? (
-        <textarea
-          defaultValue={editContent ? editContent : article.text}
-          onChange={(e) => setEditContent(e.target.value)}
-        ></textarea>
-      ) : (
-        <p style={{ marginLeft: '20px' }}>
-          {editContent ? editContent : article.text}
+      <div className="post-name-date">
+        <p className="post-name">
+          {article.userId.firstName} {article.userId.lastName}
         </p>
-      )}
-      <p>
-        {article.userId.firstName} {article.userId.lastName}
-      </p>
-      <p>{dateFormater(article.date)}</p>
-      <img src={article.imageUrl} alt="" className="post-img" />
+        <p className="post-date">{dateFormater(article.date)}</p>
+      </div>
 
-      <div>
-        <p style={{ position: 'absolute', right: '160px', bottom: '0px' }}>
+      <div className="post-text-img">
+        {isEditing ? (
+          <textarea
+            className="textarea-edit"
+            defaultValue={editContent ? editContent : article.text}
+            onChange={(e) => setEditContent(e.target.value)}
+          ></textarea>
+        ) : (
+          <p>{editContent ? editContent : article.text}</p>
+        )}
+        <a href={article.imageUrl}>
+          <img src={article.imageUrl} alt="" className="post-img" />
+        </a>
+      </div>
+      <div className="post-like-edit">
+        <p>
           <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} />{' '}
           {article.likes}
         </p>
-        {isEditing ? (
-          <div>
-            <button
-              onClick={() => handleEdit()}
-              style={{ position: 'absolute', right: '100px', bottom: '10px' }}
-            >
-              Valider
+        <div className="btn-valider-img">
+          {isEditing ? (
+            <div>
+              <button className="btn-valider" onClick={() => handleEdit()}>
+                Valider
+              </button>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                accept=".jpeg, .jpg, .png"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+          ) : (
+            <button className="btn-modifier" onClick={() => setIsEditing(true)}>
+              Modifier
             </button>
-            <input
-              type="file"
-              name="file"
-              id="file"
-              accept=".jpeg, .jpg, .png"
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-          </div>
-        ) : (
-          <button
-            onClick={() => setIsEditing(true)}
-            style={{ position: 'absolute', right: '100px', bottom: '10px' }}
-          >
-            Edit
-          </button>
-        )}
+          )}
 
-        <button
-          onClick={() => {
-            if (window.confirm('Voulez-vous vraiment supprimer ce Post')) {
-              handleDelete();
-            }
-          }}
-          style={{ position: 'absolute', right: '10px', bottom: '10px' }}
-        >
-          Supprimer
-        </button>
+          <button
+            onClick={() => {
+              if (window.confirm('Voulez-vous vraiment supprimer ce Post')) {
+                handleDelete();
+              }
+            }}
+          >
+            Supprimer
+          </button>
+        </div>
       </div>
     </div>
   );

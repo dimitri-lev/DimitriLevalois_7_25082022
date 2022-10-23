@@ -6,7 +6,8 @@ body {
   text-align: center;
   display: flex;
   justify-content: center;
-  height: 180px;
+  height: 200px;
+  width: 100%;
 }
 
 li {
@@ -16,9 +17,16 @@ li {
 .form-container {
   display: flex;
   background-color: #ffd7d7;
-  width: 50%;
   align-items: center;
-  border-radius: 30px;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.form-container ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  padding-right: 20px;
 }
 
 .btn-log {
@@ -34,18 +42,47 @@ li {
   opacity: 0.5;
 }
 
-.signIn-container input {
+.signIn-container {
+  display: flex;
+  height: 70%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.signIn-container input,
+.signUp-form input {
   border-radius: 30px;
+  text-align: center;
 }
 
-.label-email {
-  padding-right: 40px;
+.signIn-form {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.label-password {
-  padding-right: 10px;
+.signUp-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.signUp-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.signIn-valider {
-  margin-left: 70px;
+.input-valider {
+  border-radius: 20px;
+  background-color: #4e5166;
+  color: white;
+  border: none;
+  padding: 5px 15px;
 }

@@ -6,7 +6,7 @@ import '../../utils/styles/Sign.css';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [success, setSuccess] = useState('false');
+  /* const [success, setSuccess] = useState('false'); */
 
   const navigate = useNavigate();
 
@@ -37,28 +37,30 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signIn-container" style={{ marginLeft: '100px' }}>
-      <form action="" onSubmit={handleLogin}>
-        <div style={{ marginBottom: '5px' }}>
-          <label className="label-email" htmlFor="email">
+    <div className="signIn-container">
+      <form className="signIn-form" action="" onSubmit={handleLogin}>
+        <div>
+          {/* <label className="label-email" htmlFor="email">
             Email
-          </label>
+          </label> */}
           <input
             name="email"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            placeholder="Email"
           />
         </div>
-        <div style={{ marginBottom: '5px' }}>
-          <label className="label-password" htmlFor="password">
+        <div>
+          {/* <label className="label-password" htmlFor="password">
             Password
-          </label>
+          </label> */}
           <input
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            placeholder="Mot de passe"
           />
         </div>
         {/* <input
@@ -68,7 +70,7 @@ const SignIn = () => {
             success === true ? navigate('/posts') : navigate('/')
           }
         /> */}
-        <input className="signIn-valider" type="submit" value="Valider" />
+        <input className="input-valider" type="submit" value="Valider" />
       </form>
     </div>
   );

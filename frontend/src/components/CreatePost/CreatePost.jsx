@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import '../../utils/styles/CreatePost.css';
 
 const CreatePost = ({ token }) => {
   const [content, setContent] = useState('');
@@ -38,24 +39,27 @@ const CreatePost = ({ token }) => {
 
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form className="form-createPost" onSubmit={(e) => handleSubmit(e)}>
         <textarea
+          className="textarea"
           type="text"
           placeholder="Message"
           onChange={(e) => setContent(e.target.value)}
           value={content}
         ></textarea>
-        <input
-          type="file"
-          name="file"
-          id="file"
-          accept=".jpeg, .jpg, .png"
-          onChange={(e) => {
-            setFile(e.target.files[0]);
-          }}
-          /* value={imgUrl} */
-        />
-        <input type="submit" value="Envoyer" />
+        <div>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept=".jpeg, .jpg, .png"
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
+            /* value={imgUrl} */
+          />
+          <input type="submit" value="Envoyer" />
+        </div>
       </form>
     </div>
   );
