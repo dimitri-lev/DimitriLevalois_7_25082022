@@ -40,6 +40,7 @@ exports.login = (req, res, next) => {
             token: jwt.sign({ userId: user._id }, process.env.SECRET_TOKEN, {
               expiresIn: '24h',
             }),
+            isAdmin: user.isAdmin,
           });
         })
         .catch((error) => res.status(500).json({ error }));

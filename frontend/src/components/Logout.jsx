@@ -5,12 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/');
+    localStorage.clear();
+  };
   return (
     <div style={{ textAlign: 'end' }}>
       <FontAwesomeIcon
         style={{ fontSize: '24px' }}
         icon={faArrowRight}
-        onClick={() => navigate('/')}
+        onClick={() => handleLogout()}
       />
     </div>
   );

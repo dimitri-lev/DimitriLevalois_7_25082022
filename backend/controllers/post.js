@@ -35,10 +35,10 @@ exports.createPost = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.updatePost = (req, res, next) => {
-  if (req.file) {
-    Post.findOne({ _id: req.params.id })
-      .then((post) => {
+/* exports.updatePost = (req, res, next) => {
+  Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      if (req.file) {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           const postObject = {
@@ -54,39 +54,69 @@ exports.updatePost = (req, res, next) => {
             .then(() => res.status(200).json({ message: 'Post modifiée' }))
             .catch((error) => res.status(400).json({ error }));
         });
-      })
-      .catch((error) => res.status(500).json({ error }));
-  } else {
-    const postObject = { ...req.body };
+      } else {
+        const postObject = { ...req.body };
 
-    //If File
-    // -Supprimer l'ancienne image
-    // -Ajouter images
-    // -Update
+        Post.updateOne(
+          { _id: req.params.id },
+          { ...postObject, _id: req.params.id }
+        )
+          .then(() => res.status(200).json({ message: 'Post modifiée' }))
+          .catch((error) => res.status(400).json({ error }));
+      }
+    })
+    .catch((error) => res.status(500).json({ error }));
+}; */
 
-    Post.updateOne(
-      { _id: req.params.id },
-      { ...postObject, _id: req.params.id }
-    )
-      .then(() => res.status(200).json({ message: 'Post modifiée' }))
-      .catch((error) => res.status(400).json({ error }));
-  }
+exports.updatePost = (req, res, next) => {
+  const postObject = req.file
+    ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body };
+
+  delete postObject.userId;
+
+  console.log(req.userId);
+  Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      if (post.userId == req.userId || req.userId.isAdmin) {
+        Post.updateOne(
+          { _id: req.params.id },
+          { ...postObject, _id: req.params.id }
+        )
+          .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+          .catch((error) => res.status(401).json({ error }));
+      } else {
+        res.status(401).json({ message: 'Not authorized' });
+      }
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 };
 
 exports.deletePost = (req, res, next) => {
   // -Supprimer l'image
   Post.findOne({ _id: req.params.id })
     .then((post) => {
+      console.log(post);
+      if (post.userId == req.userId || req.userId.isAdmin) {
+        const filename = post.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, () => {
+          Post.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: 'Post supprimée' }))
+            .catch((error) => res.status(400).json({ error }));
+        });
+      } else {
+        res.status(401).json({ message: 'Not authorized' });
+      }
       //Post.userId == req.userId || req.isAdmin
       //TRAITEMENT
       //else (ERROR)
-
-      const filename = post.imageUrl.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Post supprimée' }))
-          .catch((error) => res.status(400).json({ error }));
-      });
     })
     .catch((error) => res.status(500).json({ error }));
 };

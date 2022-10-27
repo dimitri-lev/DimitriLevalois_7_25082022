@@ -14,7 +14,8 @@ function Posts() {
 
   //HTML afficher tous les posts via composant post (image, text, j'aime)
 
-  const token = localStorage.getItem('token');
+  const tokenData = JSON.parse(localStorage.getItem('token'));
+  const token = tokenData.token;
 
   if (!token) {
     return <Navigate to="/" />;

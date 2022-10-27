@@ -8,6 +8,8 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 const Post = ({ article, token }) => {
   console.log(article);
 
+  const tokenData = JSON.parse(localStorage.getItem('token'));
+
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState('');
   const [file, setFile] = useState(null);
@@ -117,36 +119,41 @@ const Post = ({ article, token }) => {
           <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} />{' '}
           {article.likes}
         </p>
-        <div className="btn-valider-img">
-          {isEditing ? (
-            <div>
-              <button className="btn-valider" onClick={() => handleEdit()}>
-                Valider
+        {article.userId._id === tokenData.id || tokenData.isAdmin ? (
+          <div className="btn-valider-img">
+            {isEditing ? (
+              <div>
+                <button className="btn-valider" onClick={() => handleEdit()}>
+                  Valider
+                </button>
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept=".jpeg, .jpg, .png"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+              </div>
+            ) : (
+              <button
+                className="btn-modifier"
+                onClick={() => setIsEditing(true)}
+              >
+                Modifier
               </button>
-              <input
-                type="file"
-                name="file"
-                id="file"
-                accept=".jpeg, .jpg, .png"
-                onChange={(e) => setFile(e.target.files[0])}
-              />
-            </div>
-          ) : (
-            <button className="btn-modifier" onClick={() => setIsEditing(true)}>
-              Modifier
-            </button>
-          )}
+            )}
 
-          <button
-            onClick={() => {
-              if (window.confirm('Voulez-vous vraiment supprimer ce Post')) {
-                handleDelete();
-              }
-            }}
-          >
-            Supprimer
-          </button>
-        </div>
+            <button
+              onClick={() => {
+                if (window.confirm('Voulez-vous vraiment supprimer ce Post')) {
+                  handleDelete();
+                }
+              }}
+            >
+              Supprimer
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ body {
 .connection-form {
   text-align: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 200px;
-  width: 100%;
 }
 
 li {
@@ -19,7 +19,8 @@ li {
   background-color: #ffd7d7;
   align-items: center;
   border-radius: 20px;
-  padding: 20px;
+  height: 150px;
+  width: 240px;
 }
 
 .form-container ul {
@@ -44,7 +45,7 @@ li {
 
 .signIn-container {
   display: flex;
-  height: 70%;
+  height: 100%;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -59,7 +60,7 @@ li {
 .signIn-form {
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height: 100%;
   align-items: center;
   justify-content: space-evenly;
 }

@@ -23,7 +23,14 @@ const SignIn = () => {
     })
       .then((res) => {
         // Enregistrer en localStorage (Token , User ID , UserAdmin)
-        localStorage.setItem('token', res.data.token);
+
+        let dataLocalStorage = {
+          token: res.data.token,
+          id: res.data.userId,
+          isAdmin: res.data.isAdmin,
+        };
+
+        localStorage.setItem('token', JSON.stringify(dataLocalStorage));
         // Redirection vers les post
         navigate('/posts');
 
