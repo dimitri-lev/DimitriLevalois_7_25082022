@@ -14,7 +14,7 @@ root.render(
       <Routes>
         {/* <AuthContextProvider> */}
         <Route exact path="/" element={<Home />} />
-        <Route path="/Posts" element={<Posts />} />
+        <Route path="/posts" element={<Posts />} />
         <Route path="*" element={<Error />} />
         {/* </AuthContextProvider> */}
       </Routes>

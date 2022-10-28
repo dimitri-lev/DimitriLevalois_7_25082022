@@ -104,7 +104,7 @@ exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       console.log(post);
-      if (post.userId == req.userId || req.userId.isAdmin) {
+      if (post.userId == req.userId || req.isAdmin) {
         const filename = post.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
           Post.deleteOne({ _id: req.params.id })
