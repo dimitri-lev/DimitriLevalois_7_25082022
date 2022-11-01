@@ -81,9 +81,12 @@ exports.updatePost = (req, res, next) => {
   delete postObject.userId;
 
   console.log(req.userId);
+  console.log(req.isAdmin);
   Post.findOne({ _id: req.params.id })
+    .populate('userId')
     .then((post) => {
-      if (post.userId == req.userId || req.userId.isAdmin) {
+      console.log(isAdmin);
+      if (post.userId == req.userId || req.isAdmin) {
         Post.updateOne(
           { _id: req.params.id },
           { ...postObject, _id: req.params.id }
@@ -101,7 +104,11 @@ exports.updatePost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
   // -Supprimer l'image
+
+  console.log(req.userId);
+  console.log(req.isAdmin);
   Post.findOne({ _id: req.params.id })
+    .populate('userId')
     .then((post) => {
       console.log(post);
       if (post.userId == req.userId || req.isAdmin) {

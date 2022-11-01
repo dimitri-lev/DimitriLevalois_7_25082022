@@ -31,7 +31,7 @@ function Posts() {
 
       !appDataParse.token ? navigate('/') : setToken(appDataParse.token);
     }
-  }, [appData, setToken]);
+  }, [appData, setToken, navigate]);
 
   //   //  else {
   //   //   if (tokenData.token) {

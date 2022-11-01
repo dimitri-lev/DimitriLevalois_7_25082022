@@ -11,6 +11,7 @@ const CreatePost = ({ token }) => {
 
     let data = new FormData();
     data.append('image', file);
+
     data.append('text', content);
 
     fetch(

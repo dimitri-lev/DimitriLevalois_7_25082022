@@ -119,7 +119,7 @@ const Post = ({ article, token }) => {
           <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} />{' '}
           {article.likes}
         </p>
-        {article.userId._id === tokenData.id || tokenData.isAdmin ? (
+        {article.userId._id === tokenData.userId || tokenData.isAdmin ? (
           <div className="btn-valider-img">
             {isEditing ? (
               <div>
