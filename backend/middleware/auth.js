@@ -9,12 +9,11 @@ module.exports = (req, res, next) => {
     const isAdmin = decodedToken.isAdmin;
     req.userId = userId;
     req.isAdmin = isAdmin;
-    /* if (req.body.userId && req.body.userId !== userId) {
+    if (req.body.userId && req.body.userId !== userId) {
       throw 'Invalid user ID';
     } else {
-      
-    } */
-    next();
+      next();
+    }
   } catch {
     res.status(401).json({
       error: new Error('Invalid request!'),

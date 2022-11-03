@@ -16,7 +16,8 @@ li {
 
 .form-container {
   display: flex;
-  background-color: #ffd7d7;
+  /* background-color: #ffd7d7; */
+  background-color: #facdb1;
   align-items: center;
   border-radius: 20px;
   height: 150px;
@@ -51,10 +52,17 @@ li {
   justify-content: center;
 }
 
-.signIn-container input,
-.signUp-form input {
+.signIn-input,
+.signUp-input {
   border-radius: 30px;
   text-align: center;
+  border: 2px solid black;
+}
+
+.signIn-input:focus,
+.signUp-input:focus {
+  outline: none !important;
+  border: 2px solid red;
 }
 
 .signIn-form {
@@ -86,4 +94,10 @@ li {
   color: white;
   border: none;
   padding: 5px 15px;
+}
+
+#register,
+#connect {
+  text-decoration: none;
+  color: #fd2d15;
 }

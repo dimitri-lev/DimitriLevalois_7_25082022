@@ -48,15 +48,15 @@ const Sign = () => {
 
       {signIn ? (
         <p>
-          Vous n'avez pas de compte<span> </span>
+          Vous n'avez pas de compte ?&nbsp;
           <a href="signup" id="register" onClick={handleSign}>
             inscription
           </a>
         </p>
       ) : (
         <p>
-          Vous avez un compte<span> </span>
-          <a href="signup" onClick={handleSign}>
+          Vous avez un compte ?&nbsp;
+          <a href="signup" id="connect" onClick={handleSign}>
             connexion
           </a>
         </p>

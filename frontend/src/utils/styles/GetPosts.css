@@ -1,7 +1,8 @@
 .post-container {
   width: 60%;
   min-height: 250px;
-  background-color: #ffd7d7;
+  /* background-color: #ffd7d7; */
+  background-color: #facdb1;
   border: 2px black solid;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -33,11 +34,11 @@
 
 .post-name {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .post-date {
-  font-weight: bold;
+  font-style: italic;
 }
 
 .post-text-img {

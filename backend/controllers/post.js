@@ -80,13 +80,14 @@ exports.updatePost = (req, res, next) => {
 
   delete postObject.userId;
 
-  console.log(req.userId);
+  /* console.log(req.userId); */
   console.log(req.isAdmin);
   Post.findOne({ _id: req.params.id })
-    .populate('userId')
+    /* .populate('userId') */
     .then((post) => {
-      console.log(isAdmin);
+      /* console.log(isAdmin); */
       if (post.userId == req.userId || req.isAdmin) {
+        console.log('ok');
         Post.updateOne(
           { _id: req.params.id },
           { ...postObject, _id: req.params.id }
@@ -108,7 +109,7 @@ exports.deletePost = (req, res, next) => {
   console.log(req.userId);
   console.log(req.isAdmin);
   Post.findOne({ _id: req.params.id })
-    .populate('userId')
+    /* .populate('userId') */
     .then((post) => {
       console.log(post);
       if (post.userId == req.userId || req.isAdmin) {

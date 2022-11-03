@@ -51,6 +51,7 @@ const SignIn = () => {
             Email
           </label> */}
           <input
+            className="signIn-input"
             name="email"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -63,6 +64,7 @@ const SignIn = () => {
             Password
           </label> */}
           <input
+            className="signIn-input"
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
