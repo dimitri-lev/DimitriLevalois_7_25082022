@@ -1,8 +1,7 @@
-import GetPosts from '../components/GetPosts/GetPosts';
+import PostContent from '../components/PostContent';
 import Logo from '../components/Logo';
 import { useNavigate } from 'react-router-dom';
-import CreatePost from '../components/CreatePost/CreatePost';
-import Logout from '../components/Logout';
+import Logout from '../components/Log/Logout';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -12,18 +11,10 @@ function Posts() {
   //Si non retoruner sur la page login
   const [token, setToken] = useState(false);
 
-  //axion get allPost (headers : autorization TOKEN)
-  //Si ok -> afficher le post
-  //Catch -> redirection login/404
-
-  //HTML afficher tous les posts via composant post (image, text, j'aime)
-
-  // const tokenData = JSON.parse(localStorage.getItem('token'));
   const appData = localStorage.getItem('token');
 
   // const token = tokenData.token;
   useEffect(() => {
-    console.log(appData);
     if (!appData) {
       navigate('/');
     } else {
@@ -32,14 +23,6 @@ function Posts() {
       !appDataParse.token ? navigate('/') : setToken(appDataParse.token);
     }
   }, [appData, setToken, navigate]);
-
-  //   //  else {
-  //   //   if (tokenData.token) {
-  //   //     setToken(tokenData.token);
-  //   //   }
-  //   // }
-
-  //UseStat newpost false
 
   return (
     <div>
@@ -50,8 +33,7 @@ function Posts() {
       <div>
         {token && (
           <>
-            <CreatePost token={token} />
-            <GetPosts token={token} />
+            <PostContent token={token} />
           </>
         )}
       </div>

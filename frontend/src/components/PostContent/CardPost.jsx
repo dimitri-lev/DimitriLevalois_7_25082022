@@ -3,11 +3,9 @@ import '../../utils/styles/GetPosts.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
-const Post = ({ article, token }) => {
-  console.log(article);
-
+const CardPost = ({ article, token, refreshPost }) => {
   const tokenData = JSON.parse(localStorage.getItem('token'));
 
   const [isEditing, setIsEditing] = useState(false);
@@ -30,8 +28,6 @@ const Post = ({ article, token }) => {
     let data = new FormData();
     data.append('image', file);
     data.append('text', editContent ? editContent : article.text);
-
-    console.log(data);
 
     /* axios({
       method: 'PUT',
@@ -58,9 +54,8 @@ const Post = ({ article, token }) => {
       .then((response) => response.json())
 
       .then((result) => {
-        console.log('Success:', result);
         setIsEditing(false);
-        window.location.reload();
+        refreshPost(token);
       })
 
       .catch((error) => {
@@ -75,8 +70,11 @@ const Post = ({ article, token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-    window.location.reload();
+    })
+      .then(() => {
+        refreshPost(token);
+      })
+      .catch((error) => console.error('Error:', error));
   };
 
   const handleLike = () => {
@@ -87,8 +85,11 @@ const Post = ({ article, token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-    window.location.reload();
+    })
+      .then(() => {
+        refreshPost(token);
+      })
+      .catch((error) => console.error('Error:', error));
   };
 
   return (
@@ -116,7 +117,7 @@ const Post = ({ article, token }) => {
       </div>
       <div className="post-like-edit">
         <p>
-          <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} />{' '}
+          <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} />
           {article.likes}
         </p>
         {article.userId._id === tokenData.userId || tokenData.isAdmin ? (
@@ -159,4 +160,4 @@ const Post = ({ article, token }) => {
   );
 };
 
-export default Post;
+export default CardPost;

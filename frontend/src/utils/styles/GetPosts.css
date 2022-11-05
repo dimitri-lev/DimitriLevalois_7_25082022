@@ -74,6 +74,11 @@
   margin: 0;
 }
 
+.post-like-edit svg {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
 .btn-modifier {
   margin-right: 10px;
 }

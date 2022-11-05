@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
-import Error from './components/Error';
+/* import Error from './components/Error'; */
 import reportWebVitals from './reportWebVitals';
 /* import { AuthContextProvider } from './store/authContext'; */
+
+function Error() {
+  return <div>Error 404</div>;
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

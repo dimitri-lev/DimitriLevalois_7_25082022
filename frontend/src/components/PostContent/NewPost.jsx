@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import '../../utils/styles/CreatePost.css';
+/* import GetPosts from '../GetPosts/GetPosts'; */
 
-const CreatePost = ({ token }) => {
+const NewPost = ({ token, refreshPost }) => {
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
 
@@ -28,9 +29,8 @@ const CreatePost = ({ token }) => {
       .then((response) => response.json())
 
       .then((result) => {
-        console.log('Success:', result);
         /* setFile(''); */
-        window.location.reload();
+        refreshPost(token);
       })
 
       .catch((error) => {
@@ -66,4 +66,4 @@ const CreatePost = ({ token }) => {
   );
 };
 
-export default CreatePost;
+export default NewPost;

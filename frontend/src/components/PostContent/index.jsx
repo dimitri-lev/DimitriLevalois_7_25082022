@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import Post from './Post';
+import CardPost from './CardPost';
+import NewPost from './NewPost';
 
-const GetPosts = ({ token }) => {
+const PostContent = ({ token }) => {
   const [postsData, setPostsData] = useState([]);
 
   //UseStatat new post
 
   useEffect(() => {
+    refreshPost(token);
+  }, [token]);
+
+  const refreshPost = (token) => {
     axios
       .get('http://localhost:3000/api/posts', {
         headers: {
@@ -16,18 +21,23 @@ const GetPosts = ({ token }) => {
         },
       })
       .then((res) => setPostsData(res.data));
-  }, [token]);
+  };
 
-  /* systeme de date ?, nom et prénom de l'auteur du post */
   return (
     <div>
+      <NewPost token={token} refreshPost={refreshPost} />
       <ul className="getPosts-container">
         {postsData.map((article) => (
-          <Post key={article._id} article={article} token={token} />
+          <CardPost
+            key={article._id}
+            article={article}
+            token={token}
+            refreshPost={refreshPost}
+          />
         ))}
       </ul>
     </div>
   );
 };
 
-export default GetPosts;
+export default PostContent;

@@ -3,7 +3,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import '../../utils/styles/Sign.css';
 
-const Sign = () => {
+const Log = () => {
   const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(true);
   const handleSign = (e) => {
@@ -20,28 +20,6 @@ const Sign = () => {
   return (
     <div className="connection-form">
       <div className="form-container">
-        {/* <ul>
-          <li>
-            <button
-              className="btn-log"
-              onClick={handleSign}
-              id="register"
-              style={{ listStyleType: 'none', marginBottom: '15px' }}
-            >
-              S'inscrire
-            </button>
-          </li>
-          <li>
-            <button
-              className="btn-log"
-              onClick={handleSign}
-              id="login"
-              style={{ listStyleType: 'none' }}
-            >
-              Se connecter
-            </button>
-          </li>
-        </ul> */}
         {signUp && <SignUp />}
         {signIn && <SignIn />}
       </div>
@@ -65,4 +43,4 @@ const Sign = () => {
   );
 };
 
-export default Sign;
+export default Log;

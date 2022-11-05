@@ -1,4 +1,4 @@
-import Sign from '../components/Sign/Sign';
+import Log from '../components/Log';
 import Logo from '../components/Logo';
 
 function Home() {
@@ -8,7 +8,7 @@ function Home() {
         <Logo />
       </div>
       <div>
-        <Sign />
+        <Log />
       </div>
     </div>
   );

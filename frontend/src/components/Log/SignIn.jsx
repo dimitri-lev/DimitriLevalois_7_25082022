@@ -35,8 +35,6 @@ const SignIn = () => {
         navigate('/posts');
 
         // setSuccess(true);
-
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

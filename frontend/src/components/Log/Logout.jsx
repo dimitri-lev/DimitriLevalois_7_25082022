@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
@@ -13,10 +13,11 @@ const Logout = () => {
   return (
     <div style={{ textAlign: 'end' }}>
       <FontAwesomeIcon
-        style={{ fontSize: '24px' }}
-        icon={faArrowRight}
+        style={{ fontSize: '30px', padding: '20px 20px 5px 0px' }}
+        icon={faSignOut}
         onClick={() => handleLogout()}
       />
+      <p style={{ margin: '0' }}>Déconnexion</p>
     </div>
   );
 };

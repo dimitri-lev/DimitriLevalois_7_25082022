@@ -22,8 +22,7 @@ const SignUp = () => {
       },
     })
       .then((res) => {
-        console.log(res);
-        window.location.reload();
+        window.location = '/';
       })
       .catch((err) => {
         console.log(err);
