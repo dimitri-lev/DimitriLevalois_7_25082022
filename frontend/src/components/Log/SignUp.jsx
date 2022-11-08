@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../../utils/styles/Sign.css';
+import '../../utils/styles/index.scss';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -10,10 +10,12 @@ const SignUp = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    const emailPasswordError = document.querySelector('.emailPassword.error');
+
     axios({
       method: 'POST',
       url: 'http://localhost:3000/api/auth/signup',
-      /* withCredentials: true, */
       data: {
         email,
         password,
@@ -21,11 +23,16 @@ const SignUp = () => {
         lastName,
       },
     })
-      .then((res) => {
+      .then(() => {
         window.location = '/';
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.data.error) {
+          emailPasswordError.innerHTML = 'Compte déjà utilisé';
+        } else {
+          emailPasswordError.innerHTML = err.response.data.message;
+        }
       });
   };
 
@@ -33,7 +40,6 @@ const SignUp = () => {
     <div className="signUp-container">
       <form className="signUp-form" action="" onSubmit={handleLogin}>
         <div>
-          {/* <label htmlFor="firstName">Prénom</label> */}
           <input
             className="signUp-input"
             type="text"
@@ -41,10 +47,10 @@ const SignUp = () => {
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
             placeholder="Prénom"
+            required
           />
         </div>
         <div>
-          {/* <label htmlFor="lastName">Nom</label> */}
           <input
             className="signUp-input"
             type="text"
@@ -52,10 +58,10 @@ const SignUp = () => {
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
             placeholder="Nom"
+            required
           />
         </div>
         <div>
-          {/* <label htmlFor="email">Email</label> */}
           <input
             className="signUp-input"
             name="email"
@@ -63,10 +69,10 @@ const SignUp = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
+            required
           />
         </div>
         <div>
-          {/* <label htmlFor="password">Password</label> */}
           <input
             className="signUp-input"
             type="password"
@@ -74,8 +80,10 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Mot de passe"
+            required
           />
         </div>
+        <div className="emailPassword error"></div>
         <input className="input-valider" type="submit" value="Valider" />
       </form>
     </div>

@@ -4,7 +4,7 @@ const passwordSchema = new passwordValidator();
 
 passwordSchema
   .is()
-  .min(10)
+  .min(8)
   .is()
   .max(64)
   .has()
@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
   if (!passwordSchema.validate(req.body.password)) {
     res.status(400).json({
       message:
-        'Le mdp doit faire au moins 10 caractère avec une majuscule et un chiffre',
+        'Le mdp doit faire au moins 8 caractères avec une majuscule et un chiffre',
     });
   } else {
     next();

@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../utils/styles/GetPosts.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import '../../utils/styles/index.scss';
 
 const CardPost = ({ article, token, refreshPost }) => {
   const tokenData = JSON.parse(localStorage.getItem('token'));
@@ -26,41 +26,23 @@ const CardPost = ({ article, token, refreshPost }) => {
 
   const handleEdit = () => {
     let data = new FormData();
+
     data.append('image', file);
     data.append('text', editContent ? editContent : article.text);
 
-    /* axios({
+    axios({
       method: 'PUT',
       url: 'http://localhost:3000/api/posts/' + article._id,
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: {
-        text: editContent ? editContent : article.text,
-      },
-    }).then(() => setIsEditing(false)); */
-
-    fetch(
-      'http://localhost:3000/api/posts/' + article._id,
-
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: data,
-      }
-    )
-      .then((response) => response.json())
-
-      .then((result) => {
+      data: data,
+    })
+      .then(() => {
         setIsEditing(false);
         refreshPost(token);
       })
-
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleDelete = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/icon-left-font.png';
-import '../utils/styles/Logo.css';
+import '../utils/styles/index.scss';
 
 const Logo = () => {
   return (

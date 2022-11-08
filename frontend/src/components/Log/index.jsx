@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import '../../utils/styles/Sign.css';
+import '../../utils/styles/index.scss';
 
 const Log = () => {
   const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(true);
+
   const handleSign = (e) => {
     e.preventDefault();
+
     if (e.target.id === 'register') {
       setSignIn(false);
       setSignUp(true);
-    } /* if (e.target.id === 'login') */ else {
+    } else {
       setSignIn(true);
       setSignUp(false);
     }

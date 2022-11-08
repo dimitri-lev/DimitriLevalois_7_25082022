@@ -24,49 +24,12 @@ exports.createPost = (req, res, next) => {
       req.file.filename
     }`,
     text: req.body.text,
-    // likes: 0,
-    // dislikes: 0,
-    // usersLiked: [' '],
-    // usersDisliked: [' '],
   });
   post
     .save()
     .then(() => res.status(201).json({ message: 'Post enregistrée' }))
     .catch((error) => res.status(400).json({ error }));
 };
-
-/* exports.updatePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      if (req.file) {
-        const filename = post.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
-          const postObject = {
-            ...req.body,
-            imageUrl: `${req.protocol}://${req.get('host')}/images/${
-              req.file.filename
-            }`,
-          };
-          Post.updateOne(
-            { _id: req.params.id },
-            { ...postObject, _id: req.params.id }
-          )
-            .then(() => res.status(200).json({ message: 'Post modifiée' }))
-            .catch((error) => res.status(400).json({ error }));
-        });
-      } else {
-        const postObject = { ...req.body };
-
-        Post.updateOne(
-          { _id: req.params.id },
-          { ...postObject, _id: req.params.id }
-        )
-          .then(() => res.status(200).json({ message: 'Post modifiée' }))
-          .catch((error) => res.status(400).json({ error }));
-      }
-    })
-    .catch((error) => res.status(500).json({ error }));
-}; */
 
 exports.updatePost = (req, res, next) => {
   const postObject = req.file
@@ -80,12 +43,10 @@ exports.updatePost = (req, res, next) => {
 
   delete postObject.userId;
 
-  /* console.log(req.userId); */
   console.log(req.isAdmin);
   Post.findOne({ _id: req.params.id })
-    /* .populate('userId') */
+
     .then((post) => {
-      /* console.log(isAdmin); */
       if (post.userId == req.userId || req.isAdmin) {
         console.log('ok');
         Post.updateOne(
@@ -104,12 +65,9 @@ exports.updatePost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  // -Supprimer l'image
-
   console.log(req.userId);
   console.log(req.isAdmin);
   Post.findOne({ _id: req.params.id })
-    /* .populate('userId') */
     .then((post) => {
       console.log(post);
       if (post.userId == req.userId || req.isAdmin) {
@@ -122,16 +80,11 @@ exports.deletePost = (req, res, next) => {
       } else {
         res.status(401).json({ message: 'Not authorized' });
       }
-      //Post.userId == req.userId || req.isAdmin
-      //TRAITEMENT
-      //else (ERROR)
     })
     .catch((error) => res.status(500).json({ error }));
 };
 
 exports.likePost = (req, res, next) => {
-  let like = req.body.like;
-  console.log(req.body);
   let userId = req.userId;
   let postId = req.params.id;
 
@@ -153,35 +106,5 @@ exports.likePost = (req, res, next) => {
           .catch((error) => res.status(400).json({ error }));
       }
     })
-    .catch((error) => sessionStorage.status(404).json({ error }));
-
-  // switch (like) {
-  //   case 1:
-  //     Post.updateOne(
-  //       { _id: postId },
-  //       { $push: { usersLiked: userId }, $inc: { likes: +1 } }
-  //     )
-  //       .then(() => res.status(200).json({ message: `J'aime` }))
-  //       .catch((error) => res.status(400).json({ error }));
-
-  //     break;
-
-  //   case 0:
-  //     Post.findOne({ _id: postId })
-  //       .then((post) => {
-  //         if (post.usersLiked.includes(userId)) {
-  //           Post.updateOne(
-  //             { _id: postId },
-  //             { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
-  //           )
-  //             .then(() => res.status(200).json({ message: `Neutre` }))
-  //             .catch((error) => res.status(400).json({ error }));
-  //         }
-  //       })
-  //       .catch((error) => sessionStorage.status(404).json({ error }));
-  //     break;
-
-  //   default:
-  //   // console.log(error);
-  // }
+    .catch((error) => res.status(404).json({ error }));
 };

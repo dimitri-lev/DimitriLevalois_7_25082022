@@ -3,11 +3,10 @@ import axios from 'axios';
 import { useState } from 'react';
 import CardPost from './CardPost';
 import NewPost from './NewPost';
+import '../../utils/styles/index.scss';
 
 const PostContent = ({ token }) => {
   const [postsData, setPostsData] = useState([]);
-
-  //UseStatat new post
 
   useEffect(() => {
     refreshPost(token);
@@ -20,7 +19,8 @@ const PostContent = ({ token }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => setPostsData(res.data));
+      .then((res) => setPostsData(res.data))
+      .catch((err) => console.log(err));
   };
 
   return (

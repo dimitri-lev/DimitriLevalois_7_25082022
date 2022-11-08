@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import '../../utils/styles/CreatePost.css';
-/* import GetPosts from '../GetPosts/GetPosts'; */
+import axios from 'axios';
+import '../../utils/styles/index.scss';
 
 const NewPost = ({ token, refreshPost }) => {
   const [content, setContent] = useState('');
@@ -12,29 +12,21 @@ const NewPost = ({ token, refreshPost }) => {
 
     let data = new FormData();
     data.append('image', file);
-
     data.append('text', content);
 
-    fetch(
-      'http://localhost:3000/api/posts',
-
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: data,
-      }
-    )
-      .then((response) => response.json())
-
-      .then((result) => {
-        /* setFile(''); */
+    axios({
+      url: 'http://localhost:3000/api/posts',
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    })
+      .then(() => {
         refreshPost(token);
       })
-
-      .catch((error) => {
-        console.error('Error:', error);
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -57,7 +49,6 @@ const NewPost = ({ token, refreshPost }) => {
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}
-            /* value={imgUrl} */
           />
           <input type="submit" value="Envoyer" />
         </div>

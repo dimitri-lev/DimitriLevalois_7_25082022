@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../utils/styles/Sign.css';
+import '../../utils/styles/index.scss';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  /* const [success, setSuccess] = useState('false'); */
 
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    const emailPasswordError = document.querySelector('.emailPassword.error');
 
     axios({
       method: 'POST',
@@ -22,8 +23,6 @@ const SignIn = () => {
       },
     })
       .then((res) => {
-        // Enregistrer en localStorage (Token , User ID , UserAdmin)
-
         let dataLocalStorage = {
           token: res.data.token,
           userId: res.data.userId,
@@ -31,12 +30,10 @@ const SignIn = () => {
         };
 
         localStorage.setItem('token', JSON.stringify(dataLocalStorage));
-        // Redirection vers les post
         navigate('/posts');
-
-        // setSuccess(true);
       })
       .catch((err) => {
+        emailPasswordError.innerHTML = 'Email ou mot de passe incorrect';
         console.log(err);
       });
   };
@@ -45,9 +42,6 @@ const SignIn = () => {
     <div className="signIn-container">
       <form className="signIn-form" action="" onSubmit={handleLogin}>
         <div>
-          {/* <label className="label-email" htmlFor="email">
-            Email
-          </label> */}
           <input
             className="signIn-input"
             name="email"
@@ -55,12 +49,10 @@ const SignIn = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
+            required
           />
         </div>
         <div>
-          {/* <label className="label-password" htmlFor="password">
-            Password
-          </label> */}
           <input
             className="signIn-input"
             type="password"
@@ -68,16 +60,11 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Mot de passe"
+            required
           />
         </div>
-        {/* <input
-          type="submit"
-          value="Se connecter"
-          onClick={() =>
-            success === true ? navigate('/posts') : navigate('/')
-          }
-        /> */}
         <input className="input-valider" type="submit" value="Valider" />
+        <div className="emailPassword error"></div>
       </form>
     </div>
   );
