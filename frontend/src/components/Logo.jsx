@@ -4,8 +4,8 @@ import '../utils/styles/index.scss';
 
 const Logo = () => {
   return (
-    <div className="header">
-      <img src={logo} alt="logo groupomania" className="app-logo" />
+    <div className="logo-container">
+      <img src={logo} alt="logo groupomania" className="logo-img" />
     </div>
   );
 };

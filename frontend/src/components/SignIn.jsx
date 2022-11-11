@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../utils/styles/index.scss';
+import '../utils/styles/index.scss';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -39,11 +39,11 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signIn-container">
-      <form className="signIn-form" action="" onSubmit={handleLogin}>
+    <div className="sign-component">
+      <form className="sign-container" action="" onSubmit={handleLogin}>
         <div>
           <input
-            className="signIn-input"
+            className="sign-input"
             name="email"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -54,7 +54,7 @@ const SignIn = () => {
         </div>
         <div>
           <input
-            className="signIn-input"
+            className="sign-input"
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}

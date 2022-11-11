@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../../utils/styles/index.scss';
+import '../utils/styles/index.scss';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -37,11 +37,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signUp-container">
-      <form className="signUp-form" action="" onSubmit={handleLogin}>
+    <div className="sign-component">
+      <form className="sign-container" action="" onSubmit={handleLogin}>
         <div>
           <input
-            className="signUp-input"
+            className="sign-input"
             type="text"
             name="fistName"
             onChange={(e) => setFirstName(e.target.value)}
@@ -52,7 +52,7 @@ const SignUp = () => {
         </div>
         <div>
           <input
-            className="signUp-input"
+            className="sign-input"
             type="text"
             name="lastName"
             onChange={(e) => setLastName(e.target.value)}
@@ -63,7 +63,7 @@ const SignUp = () => {
         </div>
         <div>
           <input
-            className="signUp-input"
+            className="sign-input"
             name="email"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +74,7 @@ const SignUp = () => {
         </div>
         <div>
           <input
-            className="signUp-input"
+            className="sign-input"
             type="password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -83,8 +83,8 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="emailPassword error"></div>
         <input className="input-valider" type="submit" value="Valider" />
+        <div className="emailPassword error"></div>
       </form>
     </div>
   );

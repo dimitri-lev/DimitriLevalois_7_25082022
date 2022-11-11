@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import '../../utils/styles/index.scss';
+import '../utils/styles/index.scss';
 
 const NewPost = ({ token, refreshPost }) => {
   const [content, setContent] = useState('');
@@ -32,9 +32,9 @@ const NewPost = ({ token, refreshPost }) => {
 
   return (
     <div>
-      <form className="form-createPost" onSubmit={(e) => handleSubmit(e)}>
+      <form className="createPost-form" onSubmit={(e) => handleSubmit(e)}>
         <textarea
-          className="textarea"
+          className="createPost-textarea"
           type="text"
           placeholder="Message"
           onChange={(e) => setContent(e.target.value)}

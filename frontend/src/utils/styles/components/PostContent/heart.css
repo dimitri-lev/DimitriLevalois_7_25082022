@@ -1,0 +1,16 @@
+.heart svg {
+  margin-right: 10px;
+}
+
+.heart .like {
+  color: red;
+  position: absolute;
+  font-size: 25px;
+  left: 5px;
+}
+
+.heart .unlike {
+  position: absolute;
+  font-size: 25px;
+  left: 5px;
+}

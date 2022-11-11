@@ -1,103 +1,27 @@
-body {
-  font-family: Lato, sans-serif;
-}
-
-.connection-form {
+.connection-component {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 200px;
-}
 
-li {
-  list-style-type: none;
-}
+  .connection-container {
+    display: flex;
+    background-color: #facdb1;
+    align-items: center;
+    border-radius: 20px;
+    height: 180px;
+    width: 280px;
+    margin-bottom: 10px;
 
-.form-container {
-  display: flex;
-  /* background-color: #ffd7d7; */
-  background-color: #facdb1;
-  align-items: center;
-  border-radius: 20px;
-  height: 150px;
-  width: 240px;
-}
+    @media screen and (max-width: 600px) {
+      width: 90%;
+    }
+  }
 
-.form-container ul {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  padding-right: 20px;
-}
-
-.btn-log {
-  padding: 10px;
-  border-radius: 20px;
-  background-color: #fd2b01d0;
-  color: white;
-  border: none;
-  width: 100px;
-}
-
-.btn-log:hover {
-  opacity: 0.5;
-}
-
-.signIn-container {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.signIn-input,
-.signUp-input {
-  border-radius: 30px;
-  text-align: center;
-  border: 2px solid black;
-}
-
-.signIn-input:focus,
-.signUp-input:focus {
-  outline: none !important;
-  border: 2px solid red;
-}
-
-.signIn-form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.signUp-container {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-.signUp-form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.input-valider {
-  border-radius: 20px;
-  background-color: #4e5166;
-  color: white;
-  border: none;
-  padding: 5px 15px;
-}
-
-#register,
-#connect {
-  text-decoration: none;
-  color: #fd2d15;
+  #register,
+  #connect {
+    text-decoration: none;
+    color: #fd2d15;
+  }
 }

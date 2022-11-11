@@ -2,8 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import '../../utils/styles/index.scss';
+import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
+import '../utils/styles/index.scss';
+import '../utils/styles/components/PostContent/heart.css';
+import { useEffect } from 'react';
 
 const CardPost = ({ article, token, refreshPost }) => {
   const tokenData = JSON.parse(localStorage.getItem('token'));
@@ -11,6 +14,18 @@ const CardPost = ({ article, token, refreshPost }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState('');
   const [file, setFile] = useState(null);
+
+  const [liked, setLiked] = useState(false);
+
+  console.log(article.usersLiked);
+
+  useEffect(() => {
+    if (article.usersLiked.includes(tokenData.userId)) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [setLiked, article, tokenData]);
 
   const dateFormater = (date) => {
     let newDate = new Date(date).toLocaleDateString('FR-fr', {
@@ -70,43 +85,81 @@ const CardPost = ({ article, token, refreshPost }) => {
     })
       .then(() => {
         refreshPost(token);
+        // setLiked(true);
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+
+  const handleUnLike = () => {
+    const articleId = article._id;
+    axios({
+      method: 'POST',
+      url: `http://localhost:3000/api/posts/${articleId}/like`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(() => {
+        refreshPost(token);
+        // setLiked(false);
       })
       .catch((error) => console.error('Error:', error));
   };
 
   return (
-    <div className="post-container">
-      <div className="post-name-date">
-        <p className="post-name">
+    <div className="post-card">
+      <div className="post-card-top">
+        <p className="post-card-name">
           {article.userId.firstName} {article.userId.lastName}
         </p>
-        <p className="post-date">{dateFormater(article.date)}</p>
+        <p className="post-card-date">{dateFormater(article.date)}</p>
       </div>
 
-      <div className="post-text-img">
+      <div className="post-card-middle">
         {isEditing ? (
           <textarea
-            className="textarea-edit"
+            className="post-card-textarea"
             defaultValue={editContent ? editContent : article.text}
             onChange={(e) => setEditContent(e.target.value)}
           ></textarea>
         ) : (
-          <p>{editContent ? editContent : article.text}</p>
+          <p className="post-card-article">
+            {editContent ? editContent : article.text}
+          </p>
         )}
-        <a href={article.imageUrl}>
-          <img src={article.imageUrl} alt="" className="post-img" />
+        <a className="post-card-anchor" href={article.imageUrl}>
+          <img src={article.imageUrl} alt="" className="post-card-img" />
         </a>
       </div>
-      <div className="post-like-edit">
-        <p>
-          <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} />
-          {article.likes}
-        </p>
+
+      <div className="post-card-down">
+        <span className="heart">
+          <span>
+            {!liked ? (
+              <FontAwesomeIcon
+                className="unlike"
+                icon={farFaHeart}
+                onClick={() => handleLike()}
+              />
+            ) : (
+              <FontAwesomeIcon
+                className="like"
+                icon={fasFaHeart}
+                onClick={() => handleUnLike()}
+              />
+            )}
+          </span>
+          <span className="post-cart-like">{article.likes}</span>
+        </span>
+
         {article.userId._id === tokenData.userId || tokenData.isAdmin ? (
-          <div className="btn-valider-img">
+          <div className="post-card-btn">
             {isEditing ? (
               <div>
-                <button className="btn-valider" onClick={() => handleEdit()}>
+                <button
+                  className="post-card-btn-valider"
+                  onClick={() => handleEdit()}
+                >
                   Valider
                 </button>
                 <input
@@ -119,7 +172,7 @@ const CardPost = ({ article, token, refreshPost }) => {
               </div>
             ) : (
               <button
-                className="btn-modifier"
+                className="post-card-btn-modifier"
                 onClick={() => setIsEditing(true)}
               >
                 Modifier

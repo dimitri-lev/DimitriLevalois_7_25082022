@@ -1,14 +1,18 @@
-import PostContent from '../components/PostContent';
 import Logo from '../components/Logo';
 import { useNavigate } from 'react-router-dom';
-import Logout from '../components/Log/Logout';
+import Logout from '../components/Logout';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import CardPost from '../components/CardPost';
+import NewPost from '../components/NewPost';
+import axios from 'axios';
+import '../utils/styles/index.scss';
 
 function Posts() {
   const navigate = useNavigate();
 
   const [token, setToken] = useState(false);
+  const [postsData, setPostsData] = useState([]);
 
   const appData = localStorage.getItem('token');
 
@@ -22,6 +26,21 @@ function Posts() {
     }
   }, [appData, setToken, navigate]);
 
+  useEffect(() => {
+    refreshPost(token);
+  }, [token]);
+
+  const refreshPost = (token) => {
+    axios
+      .get('http://localhost:3000/api/posts', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => setPostsData(res.data))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <div>
@@ -30,9 +49,19 @@ function Posts() {
       </div>
       <div>
         {token && (
-          <>
-            <PostContent token={token} />
-          </>
+          <div className="post-component">
+            <NewPost token={token} refreshPost={refreshPost} />
+            <ul className="post-container">
+              {postsData.map((article) => (
+                <CardPost
+                  key={article._id}
+                  article={article}
+                  token={token}
+                  refreshPost={refreshPost}
+                />
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>
