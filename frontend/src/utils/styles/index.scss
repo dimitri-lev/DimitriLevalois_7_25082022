@@ -2,10 +2,10 @@
 
 @import './components/Logo';
 
-@import './components/Log/index';
-@import './components/Log/Logout';
-@import './components/Log/Sign';
+@import './Home';
+@import './components/Logout';
+@import './components/Sign';
 
-@import './components/PostContent/index';
-@import './components/PostContent/CardPost';
-@import './components/PostContent/NewPost';
+@import './Posts';
+@import './components/CardPost';
+@import './components/NewPost';

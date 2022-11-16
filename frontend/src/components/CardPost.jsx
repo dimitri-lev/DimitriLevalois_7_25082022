@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
 import '../utils/styles/index.scss';
-import '../utils/styles/components/PostContent/heart.css';
+/* import '../utils/styles/components/PostContent/heart.css'; */
 import { useEffect } from 'react';
 
 const CardPost = ({ article, token, refreshPost }) => {
@@ -90,22 +90,6 @@ const CardPost = ({ article, token, refreshPost }) => {
       .catch((error) => console.error('Error:', error));
   };
 
-  const handleUnLike = () => {
-    const articleId = article._id;
-    axios({
-      method: 'POST',
-      url: `http://localhost:3000/api/posts/${articleId}/like`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(() => {
-        refreshPost(token);
-        // setLiked(false);
-      })
-      .catch((error) => console.error('Error:', error));
-  };
-
   return (
     <div className="post-card">
       <div className="post-card-top">
@@ -133,19 +117,19 @@ const CardPost = ({ article, token, refreshPost }) => {
       </div>
 
       <div className="post-card-down">
-        <span className="heart">
+        <span className="post-card-heart">
           <span>
             {!liked ? (
               <FontAwesomeIcon
-                className="unlike"
+                className="post-card-unlike"
                 icon={farFaHeart}
                 onClick={() => handleLike()}
               />
             ) : (
               <FontAwesomeIcon
-                className="like"
+                className="post-card-like"
                 icon={fasFaHeart}
-                onClick={() => handleUnLike()}
+                onClick={() => handleLike()}
               />
             )}
           </span>
