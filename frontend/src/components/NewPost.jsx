@@ -24,6 +24,7 @@ const NewPost = ({ token, refreshPost }) => {
     })
       .then(() => {
         refreshPost(token);
+        setContent('');
       })
       .catch((err) => {
         console.error(err);

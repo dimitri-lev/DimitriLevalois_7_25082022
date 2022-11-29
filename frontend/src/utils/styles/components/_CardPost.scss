@@ -1,6 +1,6 @@
 .post-card {
-  width: 60%;
-  min-height: 250px;
+  width: 50%;
+  /* min-height: 250px; */
   background-color: #facdb1;
   border: 2px black solid;
   border-radius: 10px;
@@ -22,10 +22,18 @@
     .post-card-name {
       font-weight: bold;
       font-size: 22px;
+
+      @media screen and (max-width: 600px) {
+        font-size: 20px;
+      }
     }
     .post-card-date {
       font-style: italic;
       font-size: 18px;
+
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -34,12 +42,16 @@
     height: 70%;
     padding-bottom: 35px;
 
-    .post-card-article {
+    .post-card-content {
       width: 60%;
       margin-right: 10px;
       display: flex;
       align-items: center;
       font-size: 19px;
+
+      @media screen and (max-width: 600px) {
+        font-size: 17px;
+      }
     }
     .post-card-anchor {
       width: 40%;
@@ -60,7 +72,7 @@
     height: 15%;
     justify-content: space-between;
     align-items: flex-end;
-    position: absolute;
+    /* position: absolute; */
     bottom: 10px;
     width: 100%;
 
@@ -68,7 +80,7 @@
       margin-right: 10px;
     }
     .post-card-heart .post-card-like {
-      color: red;
+      color: #fd2c00;
       position: absolute;
       font-size: 25px;
       left: 5px;

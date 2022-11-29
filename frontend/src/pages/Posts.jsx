@@ -52,10 +52,10 @@ function Posts() {
           <div className="post-component">
             <NewPost token={token} refreshPost={refreshPost} />
             <ul className="post-container">
-              {postsData.map((article) => (
+              {postsData.map((post) => (
                 <CardPost
-                  key={article._id}
-                  article={article}
+                  key={post._id}
+                  post={post}
                   token={token}
                   refreshPost={refreshPost}
                 />

@@ -4,9 +4,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
 import reportWebVitals from './reportWebVitals';
+import { useNavigate } from 'react-router-dom';
 
 function Error() {
-  return <div>Error 404</div>;
+  const navigate = useNavigate();
+  return (
+    <div className="error-container">
+      <div className="error-message">
+        La page que vous cherchez n'existe pas 🙈
+      </div>
+      <button class="error-btn" onClick={() => navigate('/')}>
+        Retour Accueil
+      </button>
+    </div>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
