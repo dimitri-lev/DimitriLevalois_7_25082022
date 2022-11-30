@@ -1,4 +1,4 @@
-<h1>Bienvenur sur le réseau social : Groupomania</h1>
+<h1>Bienvenue sur le réseau social : Groupomania</h1>
 
 Pour pouvoir utiliser cette application, clonez ce repository.
 
