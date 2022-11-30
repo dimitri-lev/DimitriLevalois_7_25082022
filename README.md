@@ -1,13 +1,23 @@
-<h1>Groupomania</h1>
+<h1>Bienvenur sur le réseau social : Groupomania</h1>
 
+Pour pouvoir utiliser cette application, clonez ce repository.
 
-Création d'un réseau social d'entreprise.
+Télécharger et installer nodeJS si besoin.
 
+---
 
-Pour lancer le projet : 
+<h2>Partie Backend</h2>
 
+	1. Taper la commande : npm install
 
-backend -> nodemon start
+	2. Lancer le serveur avec : nodemon start
 
+---
 
-frontend -> npm start 
+<h2>Partie Frontend</h2>
+
+	Taper la commande : npm start pour lancer react
+
+---
+
+Bonne découverte ! 
