@@ -1,0 +1,35 @@
+.sign-component {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .sign-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .sign-input {
+    border-radius: 30px;
+    text-align: center;
+    border: 2px solid black;
+    height: 20px;
+    width: 200px;
+    &:focus {
+      outline: none !important;
+      border: 2px solid #fd2d15;
+    }
+  }
+
+  .input-valider {
+    border-radius: 20px;
+    background-color: #4e5166;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+  }
+}
