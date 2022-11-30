@@ -47,6 +47,7 @@ const SignUp = () => {
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
             placeholder="Prénom"
+            aria-label="Saissisez votre prénom"
             required
           />
         </div>
@@ -58,6 +59,7 @@ const SignUp = () => {
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
             placeholder="Nom"
+            aria-label="Saissisez votre nom"
             required
           />
         </div>
@@ -69,6 +71,7 @@ const SignUp = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
+            aria-label="Saissisez votre email"
             required
           />
         </div>
@@ -80,6 +83,7 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Mot de passe"
+            aria-label="Saissisez votre mot de passe"
             required
           />
         </div>

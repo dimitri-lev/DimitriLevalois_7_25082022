@@ -49,6 +49,7 @@ const SignIn = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
+            aria-label="Saissisez votre email"
             required
           />
         </div>
@@ -60,6 +61,7 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Mot de passe"
+            aria-label="Saissisez votre mot de passe"
             required
           />
         </div>

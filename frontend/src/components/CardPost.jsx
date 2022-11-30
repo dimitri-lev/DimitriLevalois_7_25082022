@@ -83,7 +83,6 @@ const CardPost = ({ post, token, refreshPost }) => {
     })
       .then(() => {
         refreshPost(token);
-        // setLiked(true);
       })
       .catch((error) => console.error('Error:', error));
   };
@@ -110,7 +109,7 @@ const CardPost = ({ post, token, refreshPost }) => {
           </p>
         )}
         <a className="post-card-anchor" href={post.imageUrl}>
-          <img src={post.imageUrl} alt="" className="post-card-img" />
+          <img src={post.imageUrl} alt="post img" className="post-card-img" />
         </a>
       </div>
 
@@ -122,12 +121,14 @@ const CardPost = ({ post, token, refreshPost }) => {
                 className="post-card-unlike"
                 icon={farFaHeart}
                 onClick={() => handleLike()}
+                aria-label="like"
               />
             ) : (
               <FontAwesomeIcon
                 className="post-card-like"
                 icon={fasFaHeart}
                 onClick={() => handleLike()}
+                aria-label="dislike"
               />
             )}
           </span>
@@ -143,6 +144,7 @@ const CardPost = ({ post, token, refreshPost }) => {
                   name="file"
                   id="file"
                   accept=".jpeg, .jpg, .png"
+                  aria-label="choissisez un fichier image"
                   onChange={(e) => setFile(e.target.files[0])}
                 />
                 <button
@@ -167,6 +169,7 @@ const CardPost = ({ post, token, refreshPost }) => {
                   handleDelete();
                 }
               }}
+              aria-label="supprimer"
             >
               Supprimer
             </button>
