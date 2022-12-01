@@ -39,7 +39,7 @@ const Home = () => {
         ) : (
           <p>
             Vous avez un compte ?&nbsp;
-            <a href="signup" id="connect" onClick={handleSign}>
+            <a href="signin" id="connect" onClick={handleSign}>
               connexion
             </a>
           </p>

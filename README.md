@@ -10,13 +10,17 @@ Télécharger et installer nodeJS si besoin.
 
 	1. Taper la commande : npm install
 
-	2. Lancer le serveur avec : nodemon start
+	2. Créer un fichier .env (npm i dotenv) avec les bonnes variables d'environnement.
+
+	3. Lancer le serveur avec : nodemon start
 
 ---
 
 <h2>Partie Frontend</h2>
 
-	Taper la commande : npm start pour lancer react
+	1. Taper la commande : npm install
+
+	2. Lancer React avec : npm start
 
 ---
 

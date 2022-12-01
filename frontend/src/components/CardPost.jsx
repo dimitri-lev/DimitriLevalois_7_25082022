@@ -16,8 +16,6 @@ const CardPost = ({ post, token, refreshPost }) => {
 
   const [liked, setLiked] = useState(false);
 
-  console.log(post.usersLiked);
-
   useEffect(() => {
     if (post.usersLiked.includes(tokenData.userId)) {
       setLiked(true);
