@@ -27,7 +27,9 @@ function Posts() {
   }, [appData, setToken, navigate]);
 
   useEffect(() => {
-    refreshPost(token);
+    if (token) {
+      refreshPost(token);
+    }
   }, [token]);
 
   const refreshPost = (token) => {
