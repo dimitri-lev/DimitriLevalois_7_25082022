@@ -17,15 +17,12 @@ exports.getOnePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   console.log(req.body);
-  // let curentDate = new Date();
-  // let myDate = curentDate.setDate(curentDate.getDate() - 1);
   const post = new Post({
     userId: req.userId,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`,
     text: req.body.text,
-    // date: myDate,
   });
   post
     .save()
