@@ -28,7 +28,7 @@ Télécharger et installer nodeJS si besoin.
 
 ---
 
-Pour créer un utilisateur admin, dans mongoDB : passer "isAdmin" à "true" dans la collection "users".
+Pour créer un utilisateur admin, dans mongoDB : passer "isAdmin" à "true" pour le "users" selectionné.
 
 ---
 
