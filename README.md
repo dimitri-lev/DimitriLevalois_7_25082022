@@ -10,9 +10,13 @@ Télécharger et installer nodeJS si besoin.
 
 	1. Taper la commande : npm install
 
-	2. Créer un fichier .env (npm i dotenv) avec les bonnes variables d'environnement.
+	2. Utiliser une database mongoDB
+	
+	3. Renommer .envExemple en.env et remplir les variables correspondant à sa database.
 
-	3. Lancer le serveur avec : nodemon start
+	4. Créer un dossier "images"
+
+	5. Lancer le serveur avec : nodemon start
 
 ---
 
