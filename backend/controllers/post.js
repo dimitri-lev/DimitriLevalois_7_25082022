@@ -58,7 +58,6 @@ exports.updatePost = (req, res, next) => {
 
     .then((post) => {
       if (post.userId == req.userId || req.isAdmin) {
-        console.log('ok');
         Post.updateOne(
           { _id: req.params.id },
           { ...postObject, _id: req.params.id }
