@@ -7,6 +7,8 @@ const NewPost = ({ token, refreshPost }) => {
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
 
+  const [contentError, setContentError] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -25,8 +27,12 @@ const NewPost = ({ token, refreshPost }) => {
       .then(() => {
         refreshPost(token);
         setContent('');
+        setContentError(false);
       })
       .catch((err) => {
+        if (content === '') {
+          setContentError(true);
+        }
         console.error(err);
       });
   };
@@ -54,6 +60,11 @@ const NewPost = ({ token, refreshPost }) => {
           <input type="submit" value="Envoyer" />
         </div>
       </form>
+      {contentError ? (
+        <div className="createPost-error">
+          Un post doit contenir au moins un caractère
+        </div>
+      ) : null}
     </div>
   );
 };

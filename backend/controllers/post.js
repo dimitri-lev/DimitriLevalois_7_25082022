@@ -17,17 +17,28 @@ exports.getOnePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   console.log(req.body);
-  const post = new Post({
-    userId: req.userId,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
-      req.file.filename
-    }`,
-    text: req.body.text,
-  });
-  post
-    .save()
-    .then(() => res.status(201).json({ message: 'Post enregistrée' }))
-    .catch((error) => res.status(400).json({ error }));
+  if (req.file) {
+    const post = new Post({
+      userId: req.userId,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${
+        req.file.filename
+      }`,
+      text: req.body.text,
+    });
+    post
+      .save()
+      .then(() => res.status(201).json({ message: 'Post enregistrée' }))
+      .catch((error) => res.status(400).json({ error }));
+  } else {
+    const post = new Post({
+      userId: req.userId,
+      text: req.body.text,
+    });
+    post
+      .save()
+      .then(() => res.status(201).json({ message: 'Post enregistrée' }))
+      .catch((error) => res.status(400).json({ error }));
+  }
 };
 
 exports.updatePost = (req, res, next) => {
@@ -70,12 +81,18 @@ exports.deletePost = (req, res, next) => {
     .then((post) => {
       console.log(post);
       if (post.userId == req.userId || req.isAdmin) {
-        const filename = post.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {
+        if (post.imageUrl) {
+          const filename = post.imageUrl.split('/images/')[1];
+          fs.unlink(`images/${filename}`, () => {
+            Post.deleteOne({ _id: req.params.id })
+              .then(() => res.status(200).json({ message: 'Post supprimée' }))
+              .catch((error) => res.status(400).json({ error }));
+          });
+        } else {
           Post.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Post supprimée' }))
             .catch((error) => res.status(400).json({ error }));
-        });
+        }
       } else {
         res.status(401).json({ message: 'Not authorized' });
       }

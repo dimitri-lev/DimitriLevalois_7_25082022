@@ -53,16 +53,20 @@ function Posts() {
         {token && (
           <div className="post-component">
             <NewPost token={token} refreshPost={refreshPost} />
-            <ul className="post-container">
-              {postsData.map((post) => (
-                <CardPost
-                  key={post._id}
-                  post={post}
-                  token={token}
-                  refreshPost={refreshPost}
-                />
-              ))}
-            </ul>
+            {postsData.length === 0 ? (
+              <div className="post-error">Il n'y a pas encore de post 🙈</div>
+            ) : (
+              <ul className="post-container">
+                {postsData.map((post) => (
+                  <CardPost
+                    key={post._id}
+                    post={post}
+                    token={token}
+                    refreshPost={refreshPost}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </div>

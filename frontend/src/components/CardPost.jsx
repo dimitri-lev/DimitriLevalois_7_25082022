@@ -106,9 +106,11 @@ const CardPost = ({ post, token, refreshPost }) => {
             {editContent ? editContent : post.text}
           </p>
         )}
-        <a className="post-card-anchor" href={post.imageUrl}>
-          <img src={post.imageUrl} alt="post img" className="post-card-img" />
-        </a>
+        {post.imageUrl ? (
+          <a className="post-card-anchor" href={post.imageUrl}>
+            <img src={post.imageUrl} alt="post img" className="post-card-img" />
+          </a>
+        ) : null}
       </div>
 
       <div className="post-card-down">
