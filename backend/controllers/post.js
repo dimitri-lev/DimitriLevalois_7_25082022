@@ -59,8 +59,6 @@ exports.updatePost = (req, res, next) => {
     .then((post) => {
       if (post.userId == req.userId || req.isAdmin) {
         if (post.imageUrl && req.file) {
-          // Je la supprimer FS
-          //Then -> Upadte post
           const filename = post.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {});
         }
