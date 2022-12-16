@@ -14,8 +14,10 @@ Télécharger et installer nodeJS si besoin.
 	
 	3. Renommer .envExemple en.env et remplir les variables correspondant à sa database.
 
-	4. Lancer le serveur avec : nodemon start
-
+	4. Créer un dossier "images"
+	
+	5. Lancer le serveur avec : nodemon start
+	
 ---
 
 <h2>Partie Frontend</h2>
